@@ -1,44 +1,124 @@
-# 바코드 크롤러
+# Repubic of Korea GTIN Code
 
-식품 바코드 데이터를 불러오기 위한 파이썬으로 제작한 크롤러
+This is a Python module for retrieving product names from the Korean GTIN(Global Trade Item Number) codes.
 
-## 1. 운영체제별 개발환경 설정 방법 (파이썬, git 설치 방법)
+## Before you begin
 
-터미널을 열고 다음의 명령어를 실행한다.
+Setting up Development Environment for Operating System.
+
+### macOS
+
+To set up the development environment on macOS, open the terminal and execute the following commands:
+
 ``` sh
-# mac 인 경우 ()
+# Install Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install pyenv
 brew install pyenv
+
+# Install Git
 brew install git
-pyenv install 3.7.2
-pyenv global 3.7.2
 
-# windwos의 경우
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-choco install python
-choco install git
+# Install Python 3.11.3 using pyenv
+pyenv install 3.11.3
 
-# android 인 경우
-pkg install python
-pkg install git
+# Set the global Python version to 3.11.3
+pyenv global 3.11.3
+
+# Create a virtual environment and activate it
+python -m venv venv
+source venv/bin/activate
 ```
 
-## 2. 파이썬 라이브러리 설치
+### Windows
+
+To set up the development environment on Windows, open the PowerShell and execute the following commands:
+
+``` sh
+# Install Chocolatey
+Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+# Install Python
+choco install python
+
+# Install Git
+choco install git
+
+# Create a virtual environment and activate it
+python -m venv venv
+venv\Scripts\activate.bat
+```
+
+### Android
+To set up the development environment on Android, open the terminal and execute the following commands:
+
+``` sh
+# Install Python
+pkg install python
+
+# Install Git
+pkg install git
+
+# Create a virtual environment and activate it
+python -m venv venv
+source venv/bin/activate
+```
+
+Install the required packages. In the terminal, run the following command:
 
 ``` sh
 pip install -r requirements.txt
 ```
 
-## 3. 스크립트 실행 방법
+## 
 
-``` sh
-python main.py
+## How to use
+
+In your Python script, import the Search class from the gtin module and create a Search object with the GTIN code as the parameter. Then, call the search_gtin() method to retrieve the product name associated with the GTIN code.
+
+``` python
+from koreannet.gtin import Search
+
+def main():
+    gtin_num = input("Please enter the GTIN (Product Barcode) number: ")
+
+    koreannet = Search(gtin_num)
+    result = koreannet.search_gtin()
+
+    if result["product_name"]:
+        print("GTIN code: " + result["gtin_code"])
+        print("Product name: " + result["product_name"])
+    else:
+        print(result["message"])
+
+if __name__ == "__main__":
+    main()
 ```
 
-## 이 프로젝트 목표
+``` sh
+# Excute Command Line Tool
+python main.py
 
-스크립트에서 가져온 이름을 데이터베이스에 연동것이 최종 목표
+# Excute Tkinter Graphic Tool
+python main-gui.py
+```
 
-- [ ] Django로 웹페이지 사이트 호스팅
-- [ ] Google Spread Sheet 연동
-- [ ] 데이터 베이스 연동
+## Result
 
+### Command Line Tool
+
+``` sh
+Please enter the GTIN (Product Barcode) number: 8801043056489
+
+GTIN code: 8801043056489
+Product name: (주)농심 신라면 건면 사발 77g
+```
+
+### Graphic Tool
+
+![Screenshot](/Screenshot.png)
+
+## License
+
+This project is licensed under the terms of the MIT license. See the [LICENSE](/LICENSE) file for details.
