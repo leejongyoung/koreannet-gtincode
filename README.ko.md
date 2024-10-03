@@ -20,11 +20,11 @@ brew install pyenv
 # Git 설치
 brew install git
 
-# Python 3.11.3 설치
-pyenv install 3.11.3
+# Python 최신버전 설치
+pyenv install [latest version]
 
 # 전역 Python 버전 설정
-pyenv global 3.11.3
+pyenv global [latest version]
 
 # 가상환경 생성 및 활성화
 python -m venv venv

@@ -1,5 +1,4 @@
 import requests
-import re
 from bs4 import BeautifulSoup
 
 class Search:
@@ -14,9 +13,9 @@ class Search:
                 'message': 'GTIN number must be 13 digits.'
             }
 
-        url = "http://www.koreannet.or.kr/home/hpisSrchGtin.gs1"
+        url = "https://www.koreannet.or.kr/front/koreannet/gtinSrch.do"
         params = {'gtin': self.gtin}
-        
+
         req = requests.post(url, data=params)
         if req.status_code != 200:
             return {
@@ -24,21 +23,21 @@ class Search:
                 "product_name": None,
                 "message": "Failed to fetch results."
             }
-        
+
         soup = BeautifulSoup(req.text, 'html.parser')
-        product_titles = soup.find_all("div", class_="productTit")
-        if not product_titles:
+        product_details = soup.find("div", class_="cont")
+
+        if not product_details:
             return {
                 "gtin_code": self.gtin,
                 "product_name": None,
                 "message": "No search results found."
             }
 
-        for result in product_titles:
-            return_msg = re.findall(r'\S+', result.text)
-            if return_msg[0] == self.gtin:
-                del return_msg[0]
-                return {
-                    "gtin_code": self.gtin,
-                    "product_name": " ".join(return_msg)
-                }
+        product_name = product_details.find("div", class_="nm").text.strip()
+
+        return {
+            "gtin_code": self.gtin,
+            "product_name": product_name,
+            "message": "Success"
+        }

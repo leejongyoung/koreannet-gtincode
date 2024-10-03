@@ -20,11 +20,11 @@ brew install pyenv
 # Install Git
 brew install git
 
-# Install Python 3.11.3 using pyenv
-pyenv install 3.11.3
+# Install Python latest using pyenv
+pyenv install [latest version]
 
-# Set the global Python version to 3.11.3
-pyenv global 3.11.3
+# Set the global Python version to latest
+pyenv global [latest version]
 
 # Create a virtual environment and activate it
 python -m venv venv
