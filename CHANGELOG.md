@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+
+- No code changes. Re-release so the `2.1.1`/`latest` Docker tags are published once the GHCR package is public.
+
 ## 2.1.0
 
 - Docker: `Dockerfile`, `compose.yaml`, and a multi-arch (amd64/arm64) image published to `ghcr.io/leejongyoung/koreannet-gtincode` on `v*` tags (non-root, read-only friendly, health check).
