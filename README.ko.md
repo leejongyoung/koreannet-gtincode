@@ -1,5 +1,7 @@
 # koreannet-gtin
 
+[![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Releases](https://img.shields.io/badge/releases-v2.0.0-blue)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
+
 [English](README.md)
 
 대한민국 GTIN(표준바코드) 번호로 [코리안넷](https://www.koreannet.or.kr/)(대한상공회의소 유통물류진흥원)에서 상품 정보를 조회합니다. 하나의 패키지를 네 가지 방식으로 쓸 수 있습니다.
@@ -13,10 +15,9 @@
 
 Windows, macOS, Linux, Android(Termux)에서 Python 3.9 이상으로 동작합니다.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/web-dark.png">
-  <img alt="브라우저 화면" src="docs/web-light.png" width="520">
-</picture>
+| 라이트 | 다크 |
+|:---:|:---:|
+| <img alt="브라우저 화면" src="docs/web-light.png" width="340"> | <img alt="브라우저 화면" src="docs/web-dark.png" width="340"> |
 
 ## 설치
 
@@ -65,10 +66,9 @@ koreannet-gtin web --port 8765                 # http://127.0.0.1:8765/ 에서 �
 
 `koreannet-gtin gui`(또는 `koreannet-gtin-gui` 실행기, 릴리스의 GUI 실행 파일)로 tkinter 창을 엽니다. 번호를 입력하거나 붙여넣고 Enter를 누르면 조회하고, 상품명이나 전체 JSON을 복사할 수 있습니다. 조회는 백그라운드에서 돌아 창이 멈추지 않습니다.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/gui-dark.png">
-  <img alt="데스크톱 GUI (macOS)" src="docs/gui-light.png" width="480">
-</picture>
+| 라이트 | 다크 |
+|:---:|:---:|
+| <img alt="데스크톱 GUI (macOS)" src="docs/gui-light.png" width="340"> | <img alt="데스크톱 GUI (macOS)" src="docs/gui-dark.png" width="340"> |
 
 ## Python
 

@@ -1,5 +1,7 @@
 # koreannet-gtin
 
+[![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Releases](https://img.shields.io/badge/releases-v2.0.0-blue)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
+
 [한국어](README.ko.md)
 
 Look up a product by its Korean GTIN (barcode) on [Koreannet](https://www.koreannet.or.kr/) (GS1 Korea / KOREA CHAMBER OF COMMERCE). One package, four ways to use it:
@@ -13,10 +15,9 @@ Look up a product by its Korean GTIN (barcode) on [Koreannet](https://www.korean
 
 Runs on Windows, macOS, Linux and Android (Termux), Python 3.9+.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/web-dark.png">
-  <img alt="Browser UI" src="docs/web-light.png" width="520">
-</picture>
+| Light | Dark |
+|:---:|:---:|
+| <img alt="Browser UI" src="docs/web-light.png" width="340"> | <img alt="Browser UI" src="docs/web-dark.png" width="340"> |
 
 ## Install
 
@@ -65,10 +66,9 @@ Input is validated before any request: GTIN-8, 12 (UPC-A), 13 (EAN-13) and 14 di
 
 `koreannet-gtin gui` (or the `koreannet-gtin-gui` launcher / the GUI executable from a release) opens a native tkinter window: type or paste a number, press Enter, and copy the product name or the full JSON. Lookups run in the background, so the window never freezes.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/gui-dark.png">
-  <img alt="Desktop GUI (macOS)" src="docs/gui-light.png" width="480">
-</picture>
+| Light | Dark |
+|:---:|:---:|
+| <img alt="Desktop GUI (macOS)" src="docs/gui-light.png" width="340"> | <img alt="Desktop GUI (macOS)" src="docs/gui-dark.png" width="340"> |
 
 ## Python
 
