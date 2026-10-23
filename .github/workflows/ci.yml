@@ -33,3 +33,17 @@ jobs:
       - run: python -m pip install ruff
       - run: ruff check .
       - run: ruff format --check .
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t koreannet-gtin:ci .
+      - name: CLI 실행 확인
+        run: docker run --rm koreannet-gtin:ci check 8801045759296
+      - name: 웹 화면 확인
+        run: |
+          docker run -d --name gtin -p 127.0.0.1:8765:8765 --read-only --cap-drop ALL koreannet-gtin:ci
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:8765/ >/dev/null && break; sleep 1; done
+          test "$(curl -s -o /dev/null -w '%{http_code}' 'http://127.0.0.1:8765/api/lookup?gtin=123')" = 400
+          docker rm -f gtin

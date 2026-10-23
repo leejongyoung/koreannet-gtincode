@@ -4,7 +4,7 @@
 
 [English](README.md)
 
-대한민국 GTIN(표준바코드) 번호로 [코리안넷](https://www.koreannet.or.kr/)(대한상공회의소 유통물류진흥원)에서 상품 정보를 조회합니다. 하나의 패키지를 네 가지 방식으로 쓸 수 있습니다.
+대한민국 GTIN(표준바코드) 번호로 [코리안넷](https://www.koreannet.or.kr/)(대한상공회의소 유통물류진흥원)에서 상품 정보를 조회합니다. 하나의 패키지를 다섯 가지 방식으로 쓸 수 있습니다.
 
 | | |
 |---|---|
@@ -12,6 +12,7 @@
 | **CLI** | `koreannet-gtin 8801045759296` |
 | **데스크톱 GUI** | `koreannet-gtin gui` (tkinter) |
 | **브라우저 화면** | `koreannet-gtin web` (휴대폰·서버에서도 사용 가능) |
+| **Docker** | `docker run -p 127.0.0.1:8765:8765 ghcr.io/leejongyoung/koreannet-gtincode` |
 
 Windows, macOS, Linux, Android(Termux)에서 Python 3.9 이상으로 동작합니다.
 
@@ -69,6 +70,22 @@ koreannet-gtin web --port 8765                 # http://127.0.0.1:8765/ 에서 �
 | 라이트 | 다크 |
 |:---:|:---:|
 | <img alt="데스크톱 GUI (macOS)" src="docs/gui-light.png" width="340"> | <img alt="데스크톱 GUI (macOS)" src="docs/gui-dark.png" width="340"> |
+
+## Docker
+
+```sh
+# 브라우저 화면: http://127.0.0.1:8765/ (로그인이 없는 서버이므로 localhost에만 묶으세요)
+docker run -d --name koreannet-gtin -p 127.0.0.1:8765:8765 ghcr.io/leejongyoung/koreannet-gtincode
+
+# CLI: 인자를 주면 기본 명령(`web`) 대신 실행됩니다
+docker run --rm ghcr.io/leejongyoung/koreannet-gtincode 8801045759296 --json
+docker run --rm -v "$PWD:/data" ghcr.io/leejongyoung/koreannet-gtincode -f /data/codes.txt --csv
+
+# 직접 빌드하거나 Compose 사용
+docker build -t koreannet-gtin . && docker compose up -d
+```
+
+이미지는 멀티 아키텍처(amd64, arm64)이고, 비루트 사용자로 실행되며, `--read-only --cap-drop ALL`에서도 동작하고, 헬스체크가 있습니다. CLI와 브라우저 화면만 들어 있습니다. tkinter 창은 데스크톱이 필요하므로 일반 설치로 쓰세요. 이미지는 `v*` 태그를 푸시하면 GitHub Container Registry에 올라갑니다. 저장소가 private인 동안에는 먼저 `docker login ghcr.io`를 하세요.
 
 ## Python
 

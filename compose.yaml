@@ -1,0 +1,12 @@
+# docker compose up -d  →  http://127.0.0.1:8765/
+# 인증이 없으므로 기본은 이 PC에서만 접속되게 127.0.0.1에 묶습니다. LAN에 열려면 "8765:8765"로 바꾸세요.
+services:
+  koreannet-gtin:
+    build: .
+    image: koreannet-gtin:local
+    ports:
+      - "127.0.0.1:8765:8765"
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]

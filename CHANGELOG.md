@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Docker: `Dockerfile`, `compose.yaml`, multi-arch image published to GHCR on `v*` tags (non-root, read-only friendly, health check).
+
 ## 2.0.0
 
 Breaking: new package name and API. See "Migrating from 1.x" in the README.

@@ -4,7 +4,7 @@
 
 [한국어](README.ko.md)
 
-Look up a product by its Korean GTIN (barcode) on [Koreannet](https://www.koreannet.or.kr/) (GS1 Korea / KOREA CHAMBER OF COMMERCE). One package, four ways to use it:
+Look up a product by its Korean GTIN (barcode) on [Koreannet](https://www.koreannet.or.kr/) (GS1 Korea / KOREA CHAMBER OF COMMERCE). One package, five ways to use it:
 
 | | |
 |---|---|
@@ -12,6 +12,7 @@ Look up a product by its Korean GTIN (barcode) on [Koreannet](https://www.korean
 | **CLI** | `koreannet-gtin 8801045759296` |
 | **Desktop GUI** | `koreannet-gtin gui` (tkinter) |
 | **Browser UI** | `koreannet-gtin web` (works on phones and servers too) |
+| **Docker** | `docker run -p 127.0.0.1:8765:8765 ghcr.io/leejongyoung/koreannet-gtincode` |
 
 Runs on Windows, macOS, Linux and Android (Termux), Python 3.9+.
 
@@ -69,6 +70,22 @@ Input is validated before any request: GTIN-8, 12 (UPC-A), 13 (EAN-13) and 14 di
 | Light | Dark |
 |:---:|:---:|
 | <img alt="Desktop GUI (macOS)" src="docs/gui-light.png" width="340"> | <img alt="Desktop GUI (macOS)" src="docs/gui-dark.png" width="340"> |
+
+## Docker
+
+```sh
+# Browser UI at http://127.0.0.1:8765/ (the server has no login, so bind it to localhost)
+docker run -d --name koreannet-gtin -p 127.0.0.1:8765:8765 ghcr.io/leejongyoung/koreannet-gtincode
+
+# CLI: any arguments replace the default `web` command
+docker run --rm ghcr.io/leejongyoung/koreannet-gtincode 8801045759296 --json
+docker run --rm -v "$PWD:/data" ghcr.io/leejongyoung/koreannet-gtincode -f /data/codes.txt --csv
+
+# Or build it yourself / use Compose
+docker build -t koreannet-gtin . && docker compose up -d
+```
+
+The image is multi-arch (amd64, arm64), runs as a non-root user, works with `--read-only --cap-drop ALL`, and has a health check. It contains the CLI and browser UI; the tkinter window needs a desktop, so use the native install for that. Images are published to GitHub Container Registry when a `v*` tag is pushed; while the repository is private, run `docker login ghcr.io` first.
 
 ## Python
 
