@@ -1,6 +1,6 @@
 # koreannet-gtin
 
-[![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Releases](https://img.shields.io/badge/releases-v2.0.0-blue)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
+[![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/leejongyoung/koreannet-gtincode)](https://github.com/leejongyoung/koreannet-gtincode/releases/latest) [![Downloads](https://img.shields.io/github/downloads/leejongyoung/koreannet-gtincode/total)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![Docker](https://img.shields.io/badge/docker-ghcr.io-2496ED?logo=docker&logoColor=white)](https://github.com/leejongyoung/koreannet-gtincode/pkgs/container/koreannet-gtincode) [![License: MIT](https://img.shields.io/github/license/leejongyoung/koreannet-gtincode)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
 
 [English](README.md)
 
@@ -85,7 +85,7 @@ docker run --rm -v "$PWD:/data" ghcr.io/leejongyoung/koreannet-gtincode -f /data
 docker build -t koreannet-gtin . && docker compose up -d
 ```
 
-이미지는 멀티 아키텍처(amd64, arm64)이고, 비루트 사용자로 실행되며, `--read-only --cap-drop ALL`에서도 동작하고, 헬스체크가 있습니다. CLI와 브라우저 화면만 들어 있습니다. tkinter 창은 데스크톱이 필요하므로 일반 설치로 쓰세요. 이미지는 `v*` 태그를 푸시하면 GitHub Container Registry에 올라갑니다. 저장소가 private인 동안에는 먼저 `docker login ghcr.io`를 하세요.
+이미지는 멀티 아키텍처(amd64, arm64)이고, 비루트 사용자로 실행되며, `--read-only --cap-drop ALL`에서도 동작하고, 헬스체크가 있습니다. CLI와 브라우저 화면만 들어 있습니다. tkinter 창은 데스크톱이 필요하므로 일반 설치로 쓰세요. 이미지는 `v*` 태그를 푸시하면 GitHub Container Registry에 올라갑니다.
 
 ## Python
 

@@ -1,8 +1,9 @@
 # Changelog
 
-## Unreleased
+## 2.1.0
 
-- Docker: `Dockerfile`, `compose.yaml`, multi-arch image published to GHCR on `v*` tags (non-root, read-only friendly, health check).
+- Docker: `Dockerfile`, `compose.yaml`, and a multi-arch (amd64/arm64) image published to `ghcr.io/leejongyoung/koreannet-gtincode` on `v*` tags (non-root, read-only friendly, health check).
+- Repository is public; README badges are live (CI, release, downloads, license).
 
 ## 2.0.0
 

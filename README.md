@@ -1,6 +1,6 @@
 # koreannet-gtin
 
-[![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Releases](https://img.shields.io/badge/releases-v2.0.0-blue)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
+[![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/leejongyoung/koreannet-gtincode)](https://github.com/leejongyoung/koreannet-gtincode/releases/latest) [![Downloads](https://img.shields.io/github/downloads/leejongyoung/koreannet-gtincode/total)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![Docker](https://img.shields.io/badge/docker-ghcr.io-2496ED?logo=docker&logoColor=white)](https://github.com/leejongyoung/koreannet-gtincode/pkgs/container/koreannet-gtincode) [![License: MIT](https://img.shields.io/github/license/leejongyoung/koreannet-gtincode)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
 
 [한국어](README.ko.md)
 
@@ -85,7 +85,7 @@ docker run --rm -v "$PWD:/data" ghcr.io/leejongyoung/koreannet-gtincode -f /data
 docker build -t koreannet-gtin . && docker compose up -d
 ```
 
-The image is multi-arch (amd64, arm64), runs as a non-root user, works with `--read-only --cap-drop ALL`, and has a health check. It contains the CLI and browser UI; the tkinter window needs a desktop, so use the native install for that. Images are published to GitHub Container Registry when a `v*` tag is pushed; while the repository is private, run `docker login ghcr.io` first.
+The image is multi-arch (amd64, arm64), runs as a non-root user, works with `--read-only --cap-drop ALL`, and has a health check. It contains the CLI and browser UI; the tkinter window needs a desktop, so use the native install for that. Images are published to GitHub Container Registry when a `v*` tag is pushed.
 
 ## Python
 
