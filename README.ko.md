@@ -1,125 +1,95 @@
-# 대한민국 GTIN 코드
+# koreannet-gtin
 
-이 파이썬 모듈은 대한민국 GTIN(Global Trade Item Number) 코드로부터 제품명을 가져오는 기능을 제공합니다.
+[English](README.md)
 
-## 사용하기 전에
+대한민국 GTIN(표준바코드) 번호로 [코리안넷](https://www.koreannet.or.kr/)(대한상공회의소 유통물류진흥원)에서 상품 정보를 조회합니다. 하나의 패키지를 네 가지 방식으로 쓸 수 있습니다.
 
-운영체제별로 개발환경을 설정해주세요.
+| | |
+|---|---|
+| **Python 라이브러리** | `from koreannet_gtin import lookup` |
+| **CLI** | `koreannet-gtin 8801045759296` |
+| **데스크톱 GUI** | `koreannet-gtin gui` (tkinter) |
+| **브라우저 화면** | `koreannet-gtin web` (휴대폰·서버에서도 사용 가능) |
 
-### macOS
+Windows, macOS, Linux, Android(Termux)에서 Python 3.9 이상으로 동작합니다.
 
-macOS에서 개발환경을 설정하기 위해서는 터미널을 열고 다음 명령어를 실행하세요.
+![브라우저 화면](docs/web.png)
 
-``` sh
-# Homebrew 설치
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+## 설치
 
-# pyenv 설치
-brew install pyenv
-
-# Git 설치
-brew install git
-
-# Python 최신버전 설치
-pyenv install [latest version]
-
-# 전역 Python 버전 설정
-pyenv global [latest version]
-
-# 가상환경 생성 및 활성화
-python -m venv venv
-source venv/bin/activate
+```sh
+# 권장: 독립된 명령줄 도구로 설치
+uv tool install git+https://github.com/leejongyoung/koreannet-gtincode
+# 또는
+pipx install git+https://github.com/leejongyoung/koreannet-gtincode
 ```
 
-### Windows
+Python 없이 쓰는 Windows/macOS/Linux 실행 파일(CLI·GUI)은 [릴리스](https://github.com/leejongyoung/koreannet-gtincode/releases)에 올라옵니다.
 
-Windows에서 개발환경을 설정하기 위해서는 PowerShell을 열고 다음 명령어를 실행하세요.
+| 플랫폼 | CLI | GUI 창 | 브라우저 화면 |
+|---|---|---|---|
+| Windows / macOS / Linux | 지원 | 지원 | 지원 |
+| Android (Termux) | 지원 | tkinter 없음 | 지원 |
+| iPhone / iPad | – | – | PC에서 `web --host 0.0.0.0`을 켜고 그 주소로 접속 |
 
-``` sh
-# Chocolatey 설치
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+참고: Linux에서 GUI는 `python3-tk`가 필요합니다(`sudo apt install python3-tk`). macOS는 python.org·Homebrew·`uv`의 Python을 쓰세요. Apple이 제공하는 Python 3.9는 Tk 8.5라서 최신 macOS에서 멈춥니다.
 
-# Python 설치
-choco install python
+## CLI
 
-# Git 설치
-choco install git
-
-# 가상환경 생성 및 활성화
-python -m venv venv
-venv\Scripts\activate.bat
+```console
+$ koreannet-gtin 8801045759296
+바코드(GTIN)  8801045759296
+상품명        (주)오뚜기 프레스코 베이컨 감자스프 180g
+상품분류      가공식품 > 즉석/편의식품 > 즉석/조리식품 > 즉석스프
+제조사        (주)오뚜기
+...
 ```
 
-### Android
-
-Android에서 개발환경을 설정하기 위해서는 터미널을 열고 다음 명령어를 실행하세요.
-
-``` sh
-# Python 설치
-pkg install python
-
-# Git 설치
-pkg install git
-
-# 가상환경 생성 및 활성화
-python -m venv venv
-source venv/bin/activate
+```sh
+koreannet-gtin 8801045759296 --json            # JSON (번호가 여러 개면 목록)
+koreannet-gtin 8801045759296 --name-only       # 상품명만
+koreannet-gtin -f codes.txt --csv > out.csv    # 파일로 일괄 조회 ('#' 주석 가능)
+cat codes.txt | koreannet-gtin - --json        # 표준 입력으로 일괄 조회
+koreannet-gtin check 8801045759296             # 체크디지트만 검사 (네트워크 사용 안 함)
+koreannet-gtin web --port 8765                 # http://127.0.0.1:8765/ 에서 브라우저 화면
 ```
 
-필요한 패키지를 설치하세요. 터미널에서 다음 명령어를 실행하세요.
+종료 코드: `0` 모두 성공, `1` 하나 이상 실패, `2` 사용법 오류. 여러 개를 조회할 때는 요청 사이에 `--delay`초(기본 1초)를 기다립니다.
 
-``` sh
-pip install -r requirements.txt
+요청 전에 입력을 검증합니다. GTIN-8, 12(UPC-A), 13(EAN-13), 14자리와 GS1 체크디지트를 확인하고, 공백·하이픈은 무시합니다.
+
+## Python
+
+```python
+from koreannet_gtin import lookup, NotFoundError, InvalidGTINError
+
+try:
+    product = lookup("8801045759296")
+except InvalidGTINError as e:   # 자릿수·체크디지트 오류. 요청을 보내지 않음
+    ...
+except NotFoundError:           # 코리안넷에 등록되지 않음
+    ...
+
+print(product.name)             # (주)오뚜기 프레스코 베이컨 감자스프 180g
+print(product.manufacturer, product.category, product.to_dict())
 ```
 
-## 사용 방법
+예외는 모두 `KoreannetError`를 상속합니다: `InvalidGTINError`, `NotFoundError`, `NetworkError`, `ParseError`(페이지 구조 변경). `lookup(gtin, session=..., timeout=...)`에 직접 만든 `requests.Session`을 넘길 수 있습니다.
 
-Python 스크립트에서 gtin 모듈에서 Search 클래스를 가져오고, GTIN 코드를 매개변수로 해서 Search 객체를 만듭니다. 그런 다음, search_gtin() 메서드를 호출하여 GTIN 코드와 관련된 제품명을 검색하세요.
+### 1.x에서 옮기기
 
-``` python
-from koreannet.gtin import Search
+`from koreannet.gtin import Search` → `from koreannet_gtin import lookup`. `Search(...).search_gtin()`은 `message`가 든 dict를 돌려줬지만, `lookup()`은 `Product`를 돌려주고 실패하면 예외를 일으킵니다. `requirements.txt`, `main.py`, `main-gui.py`는 `koreannet-gtin` 명령으로 대체되었고 `pyperclip`은 더 이상 필요 없습니다.
 
-def main():
-    gtin_num = input("Please enter the GTIN (Product Barcode) number: ")
+## 데이터에 대해
 
-    koreannet = Search(gtin_num)
-    result = koreannet.search_gtin()
+결과는 코리안넷의 공개 검색 페이지에서 가져오며 공식 API를 쓰지 않습니다. 코리안넷은 페이지에서 정보가 대한상공회의소의 귀속 자산이며 무단 수집·유통은 법적 제재를 받을 수 있다고 밝히고, `robots.txt`로 `/front/koreannet/gtinSrch*`의 크롤링을 막고 있습니다. 가끔 개별 상품을 조회하는 용도로만 쓰고, 일괄 조회의 기본 대기 시간을 유지하며, 데이터를 복제·재배포하지 마세요. 페이지 구조가 예고 없이 바뀔 수 있으며, 바뀌면 엉뚱한 값 대신 `ParseError`가 발생합니다.
 
-    if result["product_name"]:
-        print("GTIN code: " + result["gtin_code"])
-        print("Product name: " + result["product_name"])
-    else:
-        print(result["message"])
+## 개발
 
-if __name__ == "__main__":
-    main()
+```sh
+python -m venv .venv && . .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -e ".[dev]"
+pytest && ruff check . && ruff format --check .
 ```
 
-``` sh
-# 커맨드라인 도구에서 실행
-python main.py
-
-# Tkinter 그래픽 도구에서 실행
-python main-gui.py
-```
-
-## 실행결과
-
-### 커맨드라인 도구
-
-``` sh
-Please enter the GTIN (Product Barcode) number: 8801043056489
-
-GTIN code: 8801043056489
-Product name: (주)농심 신라면 건면 사발 77g
-```
-
-### 그래픽 도구
-
-- [다운로드](https://github.com/leejongyoung/koreannet-gtincode/releases)
-
-![스크린샷](/Screenshot.png)
-
-## 라이선스
-
-이 프로젝트는 MIT 라이선스 조건에 따라 라이선스가 부여됩니다. 자세한 내용은 [LICENSE](/LICENSE) 파일을 확인해주세요.
+[CONTRIBUTING.md](CONTRIBUTING.md)를 보세요. MIT 라이선스([LICENSE](LICENSE)).

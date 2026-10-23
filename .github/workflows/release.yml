@@ -1,0 +1,70 @@
+name: Release
+
+# v* 태그를 푸시하면 Windows · macOS · Linux 실행 파일과 wheel을 GitHub Release에 올립니다.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  binaries:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: windows-latest, name: windows-x64, ext: .exe }
+          - { os: macos-latest, name: macos-arm64, ext: "" }
+          - { os: macos-15-intel, name: macos-x64, ext: "" }
+          - { os: ubuntu-latest, name: linux-x64, ext: "" }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Linux: tkinter 확인
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y python3-tk
+      - run: python -m pip install . pyinstaller
+      - name: 실행 파일 빌드
+        shell: bash
+        run: |
+          pyinstaller --onefile --name koreannet-gtin packaging/cli_entry.py
+          pyinstaller --onefile --windowed --name koreannet-gtin-gui packaging/gui_entry.py
+          mkdir out
+          cp dist/koreannet-gtin${{ matrix.ext }} out/koreannet-gtin-${{ matrix.name }}${{ matrix.ext }}
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            ditto -c -k --keepParent dist/koreannet-gtin-gui.app out/koreannet-gtin-gui-${{ matrix.name }}.zip
+          else
+            cp dist/koreannet-gtin-gui${{ matrix.ext }} out/koreannet-gtin-gui-${{ matrix.name }}${{ matrix.ext }}
+          fi
+      - name: 빌드한 CLI 실행 확인
+        shell: bash
+        run: out/koreannet-gtin-${{ matrix.name }}${{ matrix.ext }} check 8801045759296
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}
+          path: out/*
+
+  publish:
+    needs: binaries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: python -m pip install build && python -m build
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            out/*
+            dist/*

@@ -424,3 +424,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,python,django,flask
+### Project ###
+.venv*/
+dist/
+build/
+*.spec

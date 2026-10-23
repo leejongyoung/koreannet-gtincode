@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "koreannet-gtin"
+dynamic = ["version"]
+description = "대한민국 GTIN(표준바코드) 번호로 코리안넷에서 상품 정보를 조회하는 Python 라이브러리 · CLI · GUI"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "Lee Jongyoung" }]
+keywords = ["gtin", "barcode", "ean", "koreannet", "korea", "바코드"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Environment :: Console",
+  "Environment :: X11 Applications",
+  "Environment :: Win32 (MS Windows)",
+  "Environment :: MacOS X",
+  "Environment :: Web Environment",
+  "Natural Language :: Korean",
+]
+dependencies = ["requests>=2.28", "beautifulsoup4>=4.11"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+koreannet-gtin = "koreannet_gtin.cli:main"
+
+[project.gui-scripts]
+koreannet-gtin-gui = "koreannet_gtin.gui:main"
+
+[project.urls]
+Homepage = "https://github.com/leejongyoung/koreannet-gtincode"
+Issues = "https://github.com/leejongyoung/koreannet-gtincode/issues"
+
+[tool.hatch.version]
+path = "src/koreannet_gtin/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/koreannet_gtin"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 110
+target-version = "py39"
+src = ["src", "tests"]
+extend-exclude = ["*.md"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["UP006", "UP007", "UP035", "UP045", "E501"]
