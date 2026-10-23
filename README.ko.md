@@ -61,6 +61,15 @@ koreannet-gtin web --port 8765                 # http://127.0.0.1:8765/ 에서 �
 
 요청 전에 입력을 검증합니다. GTIN-8, 12(UPC-A), 13(EAN-13), 14자리와 GS1 체크디지트를 확인하고, 공백·하이픈은 무시합니다.
 
+## 데스크톱 GUI
+
+`koreannet-gtin gui`(또는 `koreannet-gtin-gui` 실행기, 릴리스의 GUI 실행 파일)로 tkinter 창을 엽니다. 번호를 입력하거나 붙여넣고 Enter를 누르면 조회하고, 상품명이나 전체 JSON을 복사할 수 있습니다. 조회는 백그라운드에서 돌아 창이 멈추지 않습니다.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/gui-dark.png">
+  <img alt="데스크톱 GUI (macOS)" src="docs/gui-light.png" width="480">
+</picture>
+
 ## Python
 
 ```python

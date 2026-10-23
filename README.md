@@ -61,6 +61,15 @@ Exit codes: `0` all found, `1` at least one failed, `2` usage error. Batches wai
 
 Input is validated before any request: GTIN-8, 12 (UPC-A), 13 (EAN-13) and 14 digits, with GS1 check-digit verification. Spaces and hyphens are ignored.
 
+## Desktop GUI
+
+`koreannet-gtin gui` (or the `koreannet-gtin-gui` launcher / the GUI executable from a release) opens a native tkinter window: type or paste a number, press Enter, and copy the product name or the full JSON. Lookups run in the background, so the window never freezes.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/gui-dark.png">
+  <img alt="Desktop GUI (macOS)" src="docs/gui-light.png" width="480">
+</picture>
+
 ## Python
 
 ```python
