@@ -13,7 +13,10 @@
 
 Windows, macOS, Linux, Android(Termux)에서 Python 3.9 이상으로 동작합니다.
 
-![브라우저 화면](docs/web.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/web-dark.png">
+  <img alt="브라우저 화면" src="docs/web-light.png" width="520">
+</picture>
 
 ## 설치
 

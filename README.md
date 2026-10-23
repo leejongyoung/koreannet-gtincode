@@ -13,7 +13,10 @@ Look up a product by its Korean GTIN (barcode) on [Koreannet](https://www.korean
 
 Runs on Windows, macOS, Linux and Android (Termux), Python 3.9+.
 
-![Browser UI](docs/web.png)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/web-dark.png">
+  <img alt="Browser UI" src="docs/web-light.png" width="520">
+</picture>
 
 ## Install
 
