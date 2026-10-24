@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/icon.svg" width="128" alt="koreannet-gtin icon"></p>
 
-# koreannet-gtin
+<h1 align="center">koreannet-gtin</h1>
 
 [![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/leejongyoung/koreannet-gtincode)](https://github.com/leejongyoung/koreannet-gtincode/releases/latest) [![Downloads](https://img.shields.io/github/downloads/leejongyoung/koreannet-gtincode/total)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![Docker](https://img.shields.io/badge/docker-ghcr.io-2496ED?logo=docker&logoColor=white)](https://github.com/leejongyoung/koreannet-gtincode/pkgs/container/koreannet-gtincode) [![License: MIT](https://img.shields.io/github/license/leejongyoung/koreannet-gtincode)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
 
@@ -18,9 +18,12 @@ Look up a product by its Korean GTIN (barcode) on [Koreannet](https://www.korean
 
 Runs on Windows, macOS, Linux and Android (Termux), Python 3.9+.
 
-| Light | Dark |
-|:---:|:---:|
-| <img alt="Browser UI" src="docs/web-light.png" width="340"> | <img alt="Browser UI" src="docs/web-dark.png" width="340"> |
+<div align="center">
+<table>
+<tr><th>Light</th><th>Dark</th></tr>
+<tr><td><img alt="Browser UI" src="docs/web-light.png" width="340"></td><td><img alt="Browser UI" src="docs/web-dark.png" width="340"></td></tr>
+</table>
+</div>
 
 ## Install
 
@@ -86,9 +89,12 @@ Input is validated before any request: GTIN-8, 12 (UPC-A), 13 (EAN-13) and 14 di
 
 `koreannet-gtin gui` (or the `koreannet-gtin-gui` launcher / the GUI executable from a release) opens a native tkinter window: type or paste a number, press Enter, and copy the product name or the full JSON. Lookups run in the background, so the window never freezes.
 
-| Light | Dark |
-|:---:|:---:|
-| <img alt="Desktop GUI (macOS)" src="docs/gui-light.png" width="340"> | <img alt="Desktop GUI (macOS)" src="docs/gui-dark.png" width="340"> |
+<div align="center">
+<table>
+<tr><th>Light</th><th>Dark</th></tr>
+<tr><td><img alt="Desktop GUI (macOS)" src="docs/gui-light.png" width="340"></td><td><img alt="Desktop GUI (macOS)" src="docs/gui-dark.png" width="340"></td></tr>
+</table>
+</div>
 
 ## Docker
 

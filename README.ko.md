@@ -1,6 +1,6 @@
 <p align="center"><img src="assets/icon.svg" width="128" alt="koreannet-gtin icon"></p>
 
-# koreannet-gtin
+<h1 align="center">koreannet-gtin</h1>
 
 [![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/leejongyoung/koreannet-gtincode)](https://github.com/leejongyoung/koreannet-gtincode/releases/latest) [![Downloads](https://img.shields.io/github/downloads/leejongyoung/koreannet-gtincode/total)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![Docker](https://img.shields.io/badge/docker-ghcr.io-2496ED?logo=docker&logoColor=white)](https://github.com/leejongyoung/koreannet-gtincode/pkgs/container/koreannet-gtincode) [![License: MIT](https://img.shields.io/github/license/leejongyoung/koreannet-gtincode)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
 
@@ -18,9 +18,12 @@
 
 Windows, macOS, Linux, Android(Termux)에서 Python 3.9 이상으로 동작합니다.
 
-| 라이트 | 다크 |
-|:---:|:---:|
-| <img alt="브라우저 화면" src="docs/web-light.png" width="340"> | <img alt="브라우저 화면" src="docs/web-dark.png" width="340"> |
+<div align="center">
+<table>
+<tr><th>라이트</th><th>다크</th></tr>
+<tr><td><img alt="브라우저 화면" src="docs/web-light.png" width="340"></td><td><img alt="브라우저 화면" src="docs/web-dark.png" width="340"></td></tr>
+</table>
+</div>
 
 ## 설치
 
@@ -86,9 +89,12 @@ koreannet-gtin web --port 8765                 # http://127.0.0.1:8765/ 에서 �
 
 `koreannet-gtin gui`(또는 `koreannet-gtin-gui` 실행기, 릴리스의 GUI 실행 파일)로 tkinter 창을 엽니다. 번호를 입력하거나 붙여넣고 Enter를 누르면 조회하고, 상품명이나 전체 JSON을 복사할 수 있습니다. 조회는 백그라운드에서 돌아 창이 멈추지 않습니다.
 
-| 라이트 | 다크 |
-|:---:|:---:|
-| <img alt="데스크톱 GUI (macOS)" src="docs/gui-light.png" width="340"> | <img alt="데스크톱 GUI (macOS)" src="docs/gui-dark.png" width="340"> |
+<div align="center">
+<table>
+<tr><th>라이트</th><th>다크</th></tr>
+<tr><td><img alt="데스크톱 GUI (macOS)" src="docs/gui-light.png" width="340"></td><td><img alt="데스크톱 GUI (macOS)" src="docs/gui-dark.png" width="340"></td></tr>
+</table>
+</div>
 
 ## Docker
 
