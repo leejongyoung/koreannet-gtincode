@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+
+- Docs: centered README title and screenshot tables. No code changes.
+
 ## 2.2.0
 
 - New app icon (barcode + scan line): Windows `.ico`, macOS `.icns` (bundle id `io.github.leejongyoung.koreannet-gtin`), tkinter window/Dock icon, browser-UI favicon and logo, README logo. Sources and generator in `assets/` and `packaging/make_icons.py`.
