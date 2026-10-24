@@ -14,6 +14,7 @@ from typing import Dict, Tuple
 from urllib.parse import parse_qs, urlsplit
 
 from . import __version__
+from ._icon import ICON_SVG
 from .client import FIELD_LABELS, lookup
 from .errors import InvalidGTINError, NetworkError, NotFoundError, ParseError
 
@@ -25,12 +26,14 @@ PAGE = """<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GTIN 조회 · 코리안넷</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
 <style>
   :root { color-scheme: light dark; --accent: #2563eb; --border: #8884; }
   * { box-sizing: border-box; }
   body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", "Noto Sans KR", sans-serif; }
   main { max-width: 640px; margin: 0 auto; padding: 32px 16px 64px; }
-  h1 { font-size: 1.4rem; margin: 0 0 4px; }
+  h1 { font-size: 1.4rem; margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
+  h1 img { width: 40px; height: 40px; }
   p.sub { margin: 0 0 24px; opacity: .7; }
   form { display: flex; gap: 8px; }
   input { flex: 1; min-width: 0; padding: 12px 14px; font: inherit; letter-spacing: .05em;
@@ -54,7 +57,7 @@ PAGE = """<!doctype html>
 </head>
 <body>
 <main>
-  <h1>GTIN 조회</h1>
+  <h1><img src="/icon.svg" alt="">GTIN 조회</h1>
   <p class="sub">바코드 번호로 코리안넷의 상품 정보를 찾습니다.</p>
   <form id="f">
     <input id="q" inputmode="numeric" autocomplete="off" autofocus placeholder="8801045759296" aria-label="바코드 번호">
@@ -170,6 +173,8 @@ class Handler(BaseHTTPRequestHandler):
         url = urlsplit(self.path)
         if url.path == "/":
             return self._send(HTTPStatus.OK, _page(), "text/html; charset=utf-8")
+        if url.path == "/icon.svg":
+            return self._send(HTTPStatus.OK, ICON_SVG.encode("utf-8"), "image/svg+xml")
         if url.path == "/api/lookup":
             gtin = (parse_qs(url.query).get("gtin") or [""])[0]
             status, payload = api_lookup(gtin)

@@ -16,10 +16,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: windows-latest, name: windows-x64, ext: .exe }
-          - { os: macos-latest, name: macos-arm64, ext: "" }
-          - { os: macos-15-intel, name: macos-x64, ext: "" }
-          - { os: ubuntu-latest, name: linux-x64, ext: "" }
+          - { os: windows-latest, name: windows-x64, ext: .exe, icon: assets/icon.ico }
+          - { os: macos-latest, name: macos-arm64, ext: "", icon: assets/icon.icns }
+          - { os: macos-15-intel, name: macos-x64, ext: "", icon: assets/icon.icns }
+          - { os: ubuntu-latest, name: linux-x64, ext: "", icon: "" }
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,8 +32,9 @@ jobs:
       - name: 실행 파일 빌드
         shell: bash
         run: |
-          pyinstaller --onefile --name koreannet-gtin packaging/cli_entry.py
-          pyinstaller --onefile --windowed --name koreannet-gtin-gui packaging/gui_entry.py
+          ICON=""; [ -n "${{ matrix.icon }}" ] && ICON="--icon ${{ matrix.icon }}"
+          pyinstaller --onefile --name koreannet-gtin ${ICON} packaging/cli_entry.py
+          pyinstaller --onefile --windowed --name koreannet-gtin-gui ${ICON} --osx-bundle-identifier io.github.leejongyoung.koreannet-gtin packaging/gui_entry.py
           mkdir out
           cp dist/koreannet-gtin${{ matrix.ext }} out/koreannet-gtin-${{ matrix.name }}${{ matrix.ext }}
           if [ "$RUNNER_OS" = "macOS" ]; then
@@ -62,6 +63,8 @@ jobs:
         with:
           path: out
           merge-multiple: true
+      - name: SHA256SUMS
+        run: cd out && sha256sum * > SHA256SUMS && cat SHA256SUMS
       - uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true

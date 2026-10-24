@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.0
+
+- New app icon (barcode + scan line): Windows `.ico`, macOS `.icns` (bundle id `io.github.leejongyoung.koreannet-gtin`), tkinter window/Dock icon, browser-UI favicon and logo, README logo. Sources and generator in `assets/` and `packaging/make_icons.py`.
+- `install.sh` (macOS/Linux): installs the CLI and GUI from the latest release after verifying `SHA256SUMS`; files fetched with `curl` carry no quarantine flag, so macOS opens them without `xattr`/"Open Anyway".
+- Releases now include `SHA256SUMS`.
+- Docs: how to open the unsigned macOS/Windows builds when downloaded from a browser.
+
 ## 2.1.1
 
 - No code changes. Re-release so the `2.1.1`/`latest` Docker tags are published once the GHCR package is public.

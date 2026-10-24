@@ -74,3 +74,8 @@ def test_foreign_host_header_is_rejected_on_loopback(server):
 )
 def test_hostname(header, expected):
     assert web._hostname(header) == expected
+
+
+def test_icon_is_served_as_svg(server):
+    status, body = get(server + "/icon.svg")
+    assert status == 200 and body.lstrip().startswith(b"<svg")

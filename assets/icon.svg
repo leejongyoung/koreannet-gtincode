@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b82f6"/>
+      <stop offset="1" stop-color="#1e3a8a"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f43f5e" stop-opacity="0"/>
+      <stop offset=".15" stop-color="#f43f5e"/>
+      <stop offset=".85" stop-color="#f43f5e"/>
+      <stop offset="1" stop-color="#f43f5e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".22"/>
+      <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow" x="-10%" y="-200%" width="120%" height="500%"><feGaussianBlur stdDeviation="9"/></filter>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#bg)"/>
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#shine)"/>
+  <g fill="#fff"><rect x="240.0" y="300" width="51" height="424" rx="3"/><rect x="308.0" y="300" width="17" height="424" rx="3"/><rect x="359.0" y="300" width="17" height="424" rx="3"/><rect x="427.0" y="300" width="17" height="424" rx="3"/><rect x="461.0" y="300" width="34" height="424" rx="3"/><rect x="529.0" y="300" width="17" height="424" rx="3"/><rect x="563.0" y="300" width="51" height="424" rx="3"/><rect x="631.0" y="300" width="34" height="424" rx="3"/><rect x="682.0" y="300" width="17" height="424" rx="3"/><rect x="733.0" y="300" width="51" height="424" rx="3"/></g>
+  <rect x="190" y="494" width="644" height="36" rx="18" fill="url(#beam)" filter="url(#glow)" opacity=".9"/>
+  <rect x="190" y="503" width="644" height="18" rx="9" fill="url(#beam)"/>
+</svg>

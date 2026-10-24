@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/icon.svg" width="128" alt="koreannet-gtin icon"></p>
+
 # koreannet-gtin
 
 [![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/leejongyoung/koreannet-gtincode)](https://github.com/leejongyoung/koreannet-gtincode/releases/latest) [![Downloads](https://img.shields.io/github/downloads/leejongyoung/koreannet-gtincode/total)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![Docker](https://img.shields.io/badge/docker-ghcr.io-2496ED?logo=docker&logoColor=white)](https://github.com/leejongyoung/koreannet-gtincode/pkgs/container/koreannet-gtincode) [![License: MIT](https://img.shields.io/github/license/leejongyoung/koreannet-gtincode)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
@@ -29,7 +31,24 @@ uv tool install git+https://github.com/leejongyoung/koreannet-gtincode
 pipx install git+https://github.com/leejongyoung/koreannet-gtincode
 ```
 
-Prebuilt Windows/macOS/Linux executables (CLI and GUI, no Python needed) are attached to each [release](https://github.com/leejongyoung/koreannet-gtincode/releases).
+### Prebuilt executables (no Python needed)
+
+macOS / Linux — one line. It downloads the CLI and GUI from the latest [release](https://github.com/leejongyoung/koreannet-gtincode/releases), verifies `SHA256SUMS`, and installs them (`--no-gui` to skip the GUI):
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/leejongyoung/koreannet-gtincode/main/install.sh | sh
+```
+
+This installs `~/.local/bin/koreannet-gtin` and, on macOS, `~/Applications/koreannet-gtin-gui.app`. Files fetched with `curl` carry no macOS quarantine flag, so the app opens by double-click with no `xattr` and no "Open Anyway".
+
+**Downloading from the browser instead?** The apps are not signed with an Apple Developer ID (that needs a paid account), so macOS Gatekeeper blocks the first launch. Either right-click → Open, or clear the flag once:
+
+```sh
+xattr -dr com.apple.quarantine ~/Downloads/koreannet-gtin-gui.app   # the unzipped app
+chmod +x koreannet-gtin-macos-arm64 && xattr -d com.apple.quarantine koreannet-gtin-macos-arm64   # the CLI binary
+```
+
+Windows: SmartScreen may warn about the unsigned `.exe` ("More info" → "Run anyway"), or run `Unblock-File .\koreannet-gtin-gui-windows-x64.exe` in PowerShell.
 
 | Platform | CLI | GUI window | Browser UI |
 |---|---|---|---|

@@ -9,6 +9,7 @@ import threading
 from typing import List, Optional
 
 from . import __version__
+from ._icon import ICON_PNG_B64
 from .client import Product, lookup
 from .errors import KoreannetError
 from .gtin import is_valid
@@ -46,6 +47,11 @@ class App:
         self.history: List[str] = []
 
         root.title(f"GTIN 조회 · 코리안넷 {__version__}")
+        try:
+            self.icon = tk.PhotoImage(data=ICON_PNG_B64)  # 참조를 유지해야 사라지지 않음
+            root.iconphoto(True, self.icon)
+        except tk.TclError:  # PNG를 못 읽는 오래된 Tk(8.5)
+            pass
         root.minsize(460, 360)
         frame = ttk.Frame(root, padding=16)
         frame.pack(fill="both", expand=True)

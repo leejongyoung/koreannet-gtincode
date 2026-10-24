@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/icon.svg" width="128" alt="koreannet-gtin icon"></p>
+
 # koreannet-gtin
 
 [![CI](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml/badge.svg)](https://github.com/leejongyoung/koreannet-gtincode/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/leejongyoung/koreannet-gtincode)](https://github.com/leejongyoung/koreannet-gtincode/releases/latest) [![Downloads](https://img.shields.io/github/downloads/leejongyoung/koreannet-gtincode/total)](https://github.com/leejongyoung/koreannet-gtincode/releases) ![Python](https://img.shields.io/badge/python-3.9%2B-3776AB?logo=python&logoColor=white) ![Platforms](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20Android-lightgrey) [![Docker](https://img.shields.io/badge/docker-ghcr.io-2496ED?logo=docker&logoColor=white)](https://github.com/leejongyoung/koreannet-gtincode/pkgs/container/koreannet-gtincode) [![License: MIT](https://img.shields.io/github/license/leejongyoung/koreannet-gtincode)](LICENSE) [![Ruff](https://img.shields.io/badge/lint-ruff-261230)](https://docs.astral.sh/ruff/)
@@ -29,7 +31,24 @@ uv tool install git+https://github.com/leejongyoung/koreannet-gtincode
 pipx install git+https://github.com/leejongyoung/koreannet-gtincode
 ```
 
-Python 없이 쓰는 Windows/macOS/Linux 실행 파일(CLI·GUI)은 [릴리스](https://github.com/leejongyoung/koreannet-gtincode/releases)에 올라옵니다.
+### 실행 파일 (Python 불필요)
+
+macOS / Linux — 한 줄이면 됩니다. 최신 [릴리스](https://github.com/leejongyoung/koreannet-gtincode/releases)의 CLI·GUI를 받아 `SHA256SUMS`로 검증한 뒤 설치합니다(`--no-gui`면 GUI 제외).
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/leejongyoung/koreannet-gtincode/main/install.sh | sh
+```
+
+`~/.local/bin/koreannet-gtin`과, macOS에서는 `~/Applications/koreannet-gtin-gui.app`이 설치됩니다. `curl`로 받은 파일에는 macOS 격리(quarantine) 표시가 붙지 않아 `xattr` 없이, "열기" 승인 없이 더블클릭으로 바로 실행됩니다.
+
+**브라우저로 직접 받았다면?** 앱은 Apple Developer ID로 서명되지 않았습니다(유료 계정이 필요합니다). 그래서 macOS Gatekeeper가 처음 실행을 막습니다. 우클릭 → 열기를 하거나, 격리 표시를 한 번 지우세요.
+
+```sh
+xattr -dr com.apple.quarantine ~/Downloads/koreannet-gtin-gui.app   # 압축을 푼 앱
+chmod +x koreannet-gtin-macos-arm64 && xattr -d com.apple.quarantine koreannet-gtin-macos-arm64   # CLI 바이너리
+```
+
+Windows: 서명되지 않은 `.exe`는 SmartScreen 경고가 뜰 수 있습니다("추가 정보" → "실행"). 또는 PowerShell에서 `Unblock-File .\koreannet-gtin-gui-windows-x64.exe`를 실행하세요.
 
 | 플랫폼 | CLI | GUI 창 | 브라우저 화면 |
 |---|---|---|---|
