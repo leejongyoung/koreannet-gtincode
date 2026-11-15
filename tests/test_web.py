@@ -103,7 +103,9 @@ def _run_page(secure: bool, clipboard: str) -> dict:
         pytest.skip("node 가 없어 페이지 스크립트를 실행할 수 없습니다")
     payload = json.dumps({"script": _page_script(), "secure": secure, "clipboard": clipboard})
     # Windows 의 기본 코드 페이지(cp1252)로 한글이 깨지지 않도록 바이트로 주고받는다.
-    done = subprocess.run([node, str(HARNESS)], input=payload.encode("utf-8"), capture_output=True, timeout=30)
+    done = subprocess.run(
+        [node, str(HARNESS)], input=payload.encode("utf-8"), capture_output=True, timeout=30
+    )
     assert done.returncode == 0, done.stderr.decode("utf-8", "replace")
     return json.loads(done.stdout.decode("utf-8"))
 
