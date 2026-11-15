@@ -1,7 +1,11 @@
 import json
+import re
+import shutil
+import subprocess
 import threading
 import urllib.error
 import urllib.request
+from pathlib import Path
 
 import pytest
 
@@ -83,11 +87,6 @@ def test_icon_is_served_as_svg(server):
 
 # ---- 클립보드 대체 경로(보안 컨텍스트가 아닌 LAN HTTP 접속 포함) ----------------------------
 
-import re
-import shutil
-import subprocess
-from pathlib import Path
-
 HARNESS = Path(__file__).parent / "clipboard_harness.mjs"
 
 
@@ -103,9 +102,10 @@ def _run_page(secure: bool, clipboard: str) -> dict:
     if node is None:
         pytest.skip("node 가 없어 페이지 스크립트를 실행할 수 없습니다")
     payload = json.dumps({"script": _page_script(), "secure": secure, "clipboard": clipboard})
-    done = subprocess.run([node, str(HARNESS)], input=payload, capture_output=True, text=True, timeout=30)
-    assert done.returncode == 0, done.stderr
-    return json.loads(done.stdout)
+    # Windows 의 기본 코드 페이지(cp1252)로 한글이 깨지지 않도록 바이트로 주고받는다.
+    done = subprocess.run([node, str(HARNESS)], input=payload.encode("utf-8"), capture_output=True, timeout=30)
+    assert done.returncode == 0, done.stderr.decode("utf-8", "replace")
+    return json.loads(done.stdout.decode("utf-8"))
 
 
 def test_insecure_context_shows_selectable_text_instead_of_a_silent_failure():
