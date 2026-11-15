@@ -59,6 +59,8 @@ Windows: SmartScreen may warn about the unsigned `.exe` ("More info" → "Run an
 | Android (Termux) | yes | no tkinter | yes |
 | iPhone / iPad | – | – | open the URL of a `web` server running on your PC (`--host 0.0.0.0`) |
 
+Browser UI over plain HTTP: browsers only allow the Clipboard API in a secure context (HTTPS or `localhost`), so on a phone opening `http://<PC address>:8765` the **copy** buttons show the text in a selectable box instead (select and copy it by hand), and the **paste** button is disabled — paste into the input directly. Do not turn off browser security flags to work around this.
+
 Notes: on Linux the GUI needs `python3-tk` (`sudo apt install python3-tk`). On macOS use a Python from python.org, Homebrew or `uv`; the Apple-supplied Python 3.9 ships Tk 8.5, which hangs on recent macOS.
 
 ## CLI

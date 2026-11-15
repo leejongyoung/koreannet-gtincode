@@ -59,6 +59,8 @@ Windows: 서명되지 않은 `.exe`는 SmartScreen 경고가 뜰 수 있습니�
 | Android (Termux) | 지원 | tkinter 없음 | 지원 |
 | iPhone / iPad | – | – | PC에서 `web --host 0.0.0.0`을 켜고 그 주소로 접속 |
 
+일반 HTTP 접속 주의: 브라우저는 클립보드 API를 보안 컨텍스트(HTTPS 또는 `localhost`)에서만 허용합니다. 그래서 휴대폰에서 `http://<PC 주소>:8765`로 접속하면 **복사** 버튼은 자동 복사 대신 선택 가능한 텍스트 상자를 보여 주니 직접 선택해 복사하세요. **붙여넣기** 버튼은 꺼지니 입력란에 직접 붙여넣으세요. 이를 우회하려고 브라우저 보안 설정을 끄지 마세요.
+
 참고: Linux에서 GUI는 `python3-tk`가 필요합니다(`sudo apt install python3-tk`). macOS는 python.org·Homebrew·`uv`의 Python을 쓰세요. Apple이 제공하는 Python 3.9는 Tk 8.5라서 최신 macOS에서 멈춥니다.
 
 ## CLI
