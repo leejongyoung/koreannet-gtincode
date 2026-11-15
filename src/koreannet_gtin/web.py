@@ -51,6 +51,10 @@ PAGE = """<!doctype html>
   dt { opacity: .6; }
   dd { margin: 0; word-break: break-word; }
   .actions { display: flex; gap: 8px; margin-top: 16px; }
+  .manual { margin-top: 12px; }
+  .manual p { margin: 0 0 6px; font-size: .9rem; opacity: .8; }
+  .manual textarea { width: 100%; min-height: 8em; padding: 10px; font: .85rem/1.4 ui-monospace, Menlo, Consolas, monospace;
+                     border: 1px solid var(--border); border-radius: 10px; background: transparent; color: inherit; }
   img { max-width: 160px; border-radius: 8px; margin-bottom: 12px; display: block; }
   footer { margin-top: 32px; font-size: .8rem; opacity: .6; }
 </style>
@@ -93,12 +97,34 @@ function render(p) {
   }
   card.append(dl);
   const actions = document.createElement("div"); actions.className = "actions";
+  const manual = document.createElement("div"); manual.className = "manual"; manual.hidden = true;
   for (const [text, fn] of [["상품명 복사", () => p.name], ["JSON 복사", () => JSON.stringify(p, null, 2)]]) {
     const b = document.createElement("button"); b.className = "ghost"; b.type = "button"; b.textContent = text;
-    b.onclick = async () => { try { await navigator.clipboard.writeText(fn()); show("복사했습니다."); } catch { show("복사하지 못했습니다.", true); } };
+    b.onclick = () => copyText(fn(), manual);
     actions.append(b);
   }
-  card.append(actions); out.append(card);
+  card.append(actions, manual); out.append(card);
+}
+
+// 클립보드 API 는 보안 컨텍스트(HTTPS 또는 localhost)에서만 쓸 수 있다. 같은 네트워크의
+// 다른 기기에서 http://<PC 주소>:8765 로 접속하면 막히므로, 이때는 보안 설정을 끄라고 하지 않고
+// 선택·복사할 수 있는 텍스트 상자를 대신 보여 준다.
+async function copyText(text, manual) {
+  if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+    try { await navigator.clipboard.writeText(text); manual.hidden = true; show("복사했습니다."); return; }
+    catch { /* 권한 거부 등: 아래 수동 복사로 넘어간다 */ }
+  }
+  showManualCopy(text, manual);
+}
+
+function showManualCopy(text, manual) {
+  manual.replaceChildren();
+  const note = document.createElement("p");
+  note.textContent = "이 연결에서는 자동 복사를 쓸 수 없습니다. 아래 내용을 선택해서 복사하세요.";
+  const box = document.createElement("textarea"); box.readOnly = true; box.value = text; box.setAttribute("aria-label", "복사할 내용");
+  manual.append(note, box); manual.hidden = false;
+  box.focus(); box.select();
+  show("자동 복사를 지원하지 않는 연결입니다. 아래 내용을 직접 복사하세요.", true);
 }
 
 $("f").addEventListener("submit", async (e) => {
@@ -114,6 +140,12 @@ $("f").addEventListener("submit", async (e) => {
   finally { $("go").disabled = false; }
 });
 
+if (!(window.isSecureContext && navigator.clipboard && navigator.clipboard.readText)) {
+  // 붙여넣기 버튼이 성공한 것처럼 보이지 않도록 끄고, 직접 붙여넣는 방법을 안내한다.
+  $("paste").disabled = true;
+  $("paste").title = "이 연결에서는 사용할 수 없습니다. 입력란에 직접 붙여넣으세요.";
+  $("q").placeholder = "8801045759296 (직접 붙여넣기)";
+}
 $("paste").addEventListener("click", async () => {
   try { $("q").value = (await navigator.clipboard.readText()).trim(); $("q").focus(); }
   catch { show("클립보드를 읽지 못했습니다. 직접 붙여넣어 주세요.", true); }
